@@ -1,0 +1,14 @@
+# Python dependencies for robot monitor backend
+
+# ROS 2 Python client library (should be installed via apt)
+# rclpy  
+
+# WebSocket server
+websockets==12.0
+
+# Configuration file parsing
+PyYAML==6.0.1
+
+# For unit testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
