@@ -1,0 +1,18 @@
+# ROS bag files
+*.mcap
+*.bag
+
+# Logs
+logs/
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.env/
+
+# VSCode
+.vscode/
