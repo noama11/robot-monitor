@@ -34,7 +34,7 @@ class GPSNode(BaseRobotNode):
 
 
 def main(args=None):
-    """Run GPS node standalone."""
+    # For Running GPS node only
     import rclpy
     
     rclpy.init(args=args)
