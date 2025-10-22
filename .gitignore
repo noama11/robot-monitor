@@ -16,3 +16,21 @@ venv/
 
 # VSCode
 .vscode/
+
+
+# --- Standard Node/Frontend additions ---
+# Node.js modules
+node_modules/
+
+# Build artifacts
+dist/
+.vite/
+
+# npm lock file
+package-lock.json
+# yarn lock file (if used)
+yarn.lock
+
+# OS/IDE files
+.DS_Store
+thumbs.db
