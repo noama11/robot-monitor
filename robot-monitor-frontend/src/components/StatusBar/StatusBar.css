@@ -1,0 +1,43 @@
+.robot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.robot-header__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.2px;
+}
+
+.robot-status {
+  --status-color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--status-color);
+  border: 1px solid var(--status-color);
+  background: transparent;
+  transition: opacity var(--speed) ease;
+}
+.robot-status:hover {
+  opacity: 0.9;
+}
+
+.robot-status__icon {
+  font-size: 1rem;
+}
+.robot-status__text {
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}

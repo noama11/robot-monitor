@@ -1,0 +1,81 @@
+.metrics-widget {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #334155;
+}
+
+.metrics-widget__header {
+  padding: 0.75rem 1rem;
+  background: #0f172a;
+  border-bottom: 1px solid #334155;
+}
+
+.metrics-widget__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #22d3ee;
+}
+
+/* Content grid */
+.metrics-widget__content {
+  flex: 1;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.metric-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #0f172a;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  transition: all 0.3s ease;
+}
+
+.metric-item--highlight {
+  background: linear-gradient(135deg, #166534 0%, #15803d 100%);
+  border: 1px solid #22c55e;
+}
+
+.metric-item__icon {
+  font-size: 1.5rem;
+}
+
+.metric-item__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.metric-item__label {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.25rem;
+}
+
+.metric-item__value {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.metric-item__subtitle {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
