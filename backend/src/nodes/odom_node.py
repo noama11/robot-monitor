@@ -1,6 +1,7 @@
 from nav_msgs.msg import Odometry
 from .base_node import BaseRobotNode
 import math
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 
 
 class OdomNode(BaseRobotNode):
@@ -13,18 +14,21 @@ class OdomNode(BaseRobotNode):
         odom_topic = self.get_topic('odom', '/robot_odom')
         queue_size = self.get_queue_size()
         
-        # Subscribe to odometry
+        
         self.subscription = self.create_subscription(
             Odometry,
             odom_topic,
             self.odom_callback,
-            queue_size
+            # queue_size
+            self.get_sensor_qos()
         )
         
         self.logger.info(f'Subscribed to {odom_topic}')
     
     def odom_callback(self, msg):
+
         """Handle incoming odometry messages."""
+        # print(f" ODOM RECEIVED")
         # Calculate speed
         vx = msg.twist.twist.linear.x
         vy = msg.twist.twist.linear.y

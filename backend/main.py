@@ -94,6 +94,13 @@ def main():
     
     print("All systems running")
     
+    
+    import time
+    print("\n=== Checking ROS Node Status ===")
+    print(f"GPS Node: {gps_node.get_name()}")
+    print(f"Odom Node: {odom_node.get_name()}")
+    print(f"Image Node: {image_node.get_name()}")
+    
     # Run ROS nodes
     try:
         executor.spin()  # Listen to topics 
@@ -106,7 +113,8 @@ def main():
         gps_node.destroy_node()
         odom_node.destroy_node()
         image_node.destroy_node()
-        rclpy.shutdown()
+        if rclpy.ok():
+            rclpy.shutdown()
 
 
 if __name__ == '__main__':

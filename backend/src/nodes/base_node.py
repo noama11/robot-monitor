@@ -2,6 +2,7 @@ import rclpy
 from rclpy.node import Node
 import logging
 import yaml
+from rclpy.qos import QoSProfile, ReliabilityPolicy, DurabilityPolicy, HistoryPolicy
 
 
 class BaseRobotNode(Node):
@@ -28,3 +29,12 @@ class BaseRobotNode(Node):
     
     def get_queue_size(self):
         return self.config.get('ros', {}).get('queue_size', 10)
+    
+    def get_sensor_qos(self):
+        """QoS profile for sensor data from bag files."""
+        return QoSProfile(
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            durability=DurabilityPolicy.VOLATILE,
+            history=HistoryPolicy.KEEP_LAST,
+            depth=self.get_queue_size()
+        )

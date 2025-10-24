@@ -16,6 +16,7 @@ venv/
 
 # VSCode
 .vscode/
+<<<<<<< HEAD
 
 
 # --- Standard Node/Frontend additions ---
@@ -34,3 +35,6 @@ yarn.lock
 # OS/IDE files
 .DS_Store
 thumbs.db
+=======
+node_modules/
+>>>>>>> main

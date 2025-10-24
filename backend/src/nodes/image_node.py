@@ -1,6 +1,7 @@
 from sensor_msgs.msg import CompressedImage
 from .base_node import BaseRobotNode
 import base64 # convert to 64 base
+from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy, DurabilityPolicy
 
 
 
@@ -24,13 +25,14 @@ class ImageNode(BaseRobotNode):
         image_topic = self.get_topic('image', '/neural_depth/left/image_rect_raw/compressed')
         queue_size = self.get_queue_size()
         
-        # Subscribe to images
+
         self.subscription = self.create_subscription(
             CompressedImage,
             image_topic,
             self.image_callback,
-            queue_size
+            self.get_sensor_qos()
         )
+
         
         self.logger.info(f'Subscribed to {image_topic} (throttle: {self.throttle_rate}Hz)')
     

@@ -2,7 +2,6 @@ import asyncio
 import websockets
 import json
 import logging
-from utils import build_payload
 
 class WebSocketServer:
     """
@@ -35,13 +34,18 @@ class WebSocketServer:
     
     async def send_data(self, websocket):
         """Send data to one client continuously."""
-        try:
-            while True:
+        
+        while True:
+            try:
                 data = self.data_manager.get_latest_data()
                 await websocket.send(json.dumps(data))
                 await asyncio.sleep(self.update_interval)
-        except websockets.exceptions.ConnectionClosed:
-            pass
+            except websockets.exceptions.ConnectionClosed:
+                self.logger.info("Client connection closed. Stopping data send task for this client.")
+                break
+            except Exception as e:
+                self.logger.error(f"Unexpected error in send_data: {e}")
+                break
     
     async def handler(self, websocket):
         """Handle client connection lifecycle."""
