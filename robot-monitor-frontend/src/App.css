@@ -16,6 +16,8 @@ body {
   height: 100vh;
   background: #0f172a;
   min-height: 100vh;
+  padding-bottom: 1rem;
+  overflow: hidden;
 }
 
 .header {
@@ -31,6 +33,11 @@ body {
   font-size: 1.75rem;
 }
 
+.bottom-bumper {
+  flex-shrink: 0;
+  height: 50px; /* שנה לטעמך: 8px/12px/24px */
+  background: transparent;
+}
 .status-badge {
   padding: 0.5rem 1rem;
   border-radius: 8px;

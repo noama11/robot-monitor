@@ -1,19 +1,33 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect } from "react";
 
 // import { useRobotData } from "./context/RobotDataContext";
+import { websocketService } from "./services/websocket";
+import { RobotDataProvider } from "./context/RobotDataProvider";
 import { useRobotData } from "./hooks/useRobotData";
 import { StatusBar } from "./components/StatusBar/StatusBar";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
 import { WEBSOCKET_CONFIG } from "./config/constants";
+import { useRobotContext } from "./context/useRobotContext";
+
 function App() {
   const { data, connectionStatus, isConnected, hasData, isStale } =
     useRobotData();
-
+  const { stale } = useRobotContext();
   // reset everything to default
   const handleResetAll = () => {
     window.dispatchEvent(new Event("dashboard-reset"));
   };
+
+  useEffect(() => {
+    console.log("App mounted. Connecting WebSocket service...");
+    websocketService.connect();
+
+    return () => {
+      console.log("App unmounting. Disconnecting WebSocket service...");
+      websocketService.disconnect();
+    };
+  }, []);
   return (
     <div className="app">
       <StatusBar
@@ -23,23 +37,25 @@ function App() {
         onResetLayout={handleResetAll}
         isConnected={isConnected}
       />
-
-      {!isConnected ? (
-        <div className="message">
-          <div className="warning">
-            <p>Not connected to backend</p>
-            <p>Make sure backend is running on {WEBSOCKET_CONFIG.url}</p>
+      <main className="app-main">
+        {!isConnected ? (
+          <div className="message">
+            <div className="warning">
+              <p>Not connected to backend</p>
+              <p>Make sure backend is running on {WEBSOCKET_CONFIG.url}</p>
+            </div>
           </div>
-        </div>
-      ) : !hasData ? (
-        <div className="app__message">
-          <div className="warning">
-            <p>⏳ Waiting for robot data...</p>
+        ) : !hasData ? (
+          <div className="app__message">
+            <div className="warning">
+              <p>⏳ Waiting for robot data...</p>
+            </div>
           </div>
-        </div>
-      ) : (
-        <Dashboard />
-      )}
+        ) : (
+          <Dashboard />
+        )}
+      </main>
+      <div className="bottom-bumper" aria-hidden="true" />{" "}
     </div>
   );
 }

@@ -31,8 +31,8 @@ export const MAP_CONFIG = {
   defaultZoom: 15,
   maxZoom: 19,
   minZoom: 10,
-  pathColor: "#3b82f6",
-  pathWeight: 3,
+  pathColor: "#2196F3",
+  pathWeight: 5,
   robotMarkerColor: "#22c55e",
 };
 

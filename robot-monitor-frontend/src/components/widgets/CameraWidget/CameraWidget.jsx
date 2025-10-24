@@ -5,7 +5,7 @@ export function CameraWidget({ image }) {
   return (
     <div className="camera-widget">
       <div className="camera-widget-header widget-header">
-        <h3 className="camera-widget-title">📷 Camera</h3>
+        <h3 className="camera-widget-title">Camera</h3>
       </div>
 
       <div className="camera-widget-content">

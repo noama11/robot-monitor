@@ -11,6 +11,7 @@ class WebSocketService {
     this.listeners = new Set(); // data listeners
     this.statusListeners = new Set();
     this.isIntentionalClose = false;
+    this.isConnecting = false;
   }
   connect() {
     // prevent duplicate connections
@@ -18,7 +19,11 @@ class WebSocketService {
       console.warn("WebSocket already connected");
       return;
     }
-
+    if (this.isConnecting) {
+      console.warn("WebSocket connection already in progress");
+      return;
+    }
+    this.isConnecting = true;
     this.isIntentionalClose = false;
 
     try {
@@ -26,6 +31,7 @@ class WebSocketService {
       this._setupEventHandlers();
     } catch (error) {
       console.error("Failed to create WebSocket:", error);
+      this.isConnecting = false;
       this._notifyStatus("error");
       this._scheduleReconnect();
     }
@@ -37,6 +43,7 @@ class WebSocketService {
     this.ws.onopen = () => {
       console.log("WebSocket connected to", WEBSOCKET_CONFIG.url);
       this.reconnectAttempts = 0; // reset counter on success
+      this.isConnecting = false;
       this._notifyStatus("connected");
     };
 
@@ -54,6 +61,7 @@ class WebSocketService {
 
     this.ws.onerror = (error) => {
       console.error("WebSocket error:", error);
+      this.isConnecting = false;
       this._notifyStatus("error");
     };
 
@@ -67,6 +75,7 @@ class WebSocketService {
         event.reason
       );
       this.ws = null;
+      this.isConnecting = false;
       this._notifyStatus("disconnected");
 
       // Only reconnect if not intentionally closed by user
@@ -152,7 +161,7 @@ class WebSocketService {
 
   disconnect() {
     this.isIntentionalClose = true; // set to intentionally disconnecting
-
+    this.isConnecting = false;
     if (this.reconnectTimeout) {
       clearTimeout(this.reconnectTimeout); // cancel future reconnect timers
       this.reconnectTimeout = null; // sets flag to prevent auto reconnect

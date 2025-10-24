@@ -1,8 +1,8 @@
 /* Cancel scrolling when dragging */
-html.react-grid-layout-dragging,
-body.react-grid-layout-dragging {
+/* html.react-grid-layout-dragging, */
+/* body.react-grid-layout-dragging {
   overflow: hidden !important;
-}
+} */
 
 /* Resize handle */
 .react-grid-item > .react-resizable-handle {

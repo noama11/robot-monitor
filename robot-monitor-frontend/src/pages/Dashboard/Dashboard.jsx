@@ -74,17 +74,18 @@ export function Dashboard() {
         layout={layout}
         onLayoutChange={saveLayout}
         cols={12}
-        rowHeight={30}
+        // rowHeight={30}
+        rowHeight={Math.floor((window.innerHeight - 60 - 8 - 32) / 40)}
         isResizable={true}
         isDraggable={true}
         // width={containerWidth}
-        isBounded
+        isBounded={true}
         resizeHandles={["se", "sw", "ne", "nw"]}
         // draggableCancel=".no-drag"
         compactType="vertical"
-        // compactType={null}
         preventCollision={true}
         draggableHandle=".widget-header"
+        draggableCancel=".map-widget, .leaflet-container, .map-interactive"
       >
         {AVAILABLE_WIDGETS.map((widget) => (
           <div

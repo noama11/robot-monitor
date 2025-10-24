@@ -1,3 +1,15 @@
+.robot-marker-custom {
+  z-index: 1000 !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+.leaflet-marker-icon {
+  overflow: visible !important;
+}
+.robot-marker-container svg {
+  transition: transform 0.3s ease;
+}
 .map-widget {
   height: 100%;
   display: flex;
@@ -31,6 +43,20 @@
   width: 100%;
   min-height: 200px;
   z-index: 0; /* המפה מתחת */
+}
+
+.robot-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.robot-marker__arrow {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.robot-marker__arrow svg {
+  display: block;
 }
 
 .robot-marker__dot {
@@ -93,4 +119,23 @@
     align-items: flex-start;
     gap: 4px;
   }
+}
+.robot-arrow-marker {
+  background: transparent !important;
+  border: none !important;
+  overflow: visible !important;
+}
+
+.robot-arrow-marker svg {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+  transition: transform 0.3s ease;
+}
+
+/* תיקון ל-Leaflet */
+.leaflet-marker-icon.robot-arrow-marker {
+  overflow: visible !important;
+}
+
+.leaflet-marker-pane {
+  z-index: 600 !important;
 }

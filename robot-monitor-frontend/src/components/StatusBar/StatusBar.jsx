@@ -1,29 +1,31 @@
 import { COLORS } from "../../config/constants";
+import { useRobotContext } from "../../context/useRobotContext";
 import "./StatusBar.css";
+
 export const StatusBar = ({
+  stale,
   connectionStatus,
   robotStatus,
-  isStale,
-
+  // isStale,
   onResetLayout,
-  isConnected,
 }) => {
+  const { isConnected } = useRobotContext();
   const getStatusInfo = () => {
-    if (connectionStatus !== "connected") {
+    if (!isConnected) {
       return {
         color: COLORS.error,
         icon: "🔴",
         text: "Disconnected",
       };
     }
-    if (isStale) {
+    if (stale) {
       return {
         color: COLORS.warning,
         icon: "🟡",
         text: "Data Stale",
       };
     }
-    if (robotStatus === "active") {
+    if (isConnected) {
       return {
         color: COLORS.success,
         icon: "🟢",
@@ -37,13 +39,21 @@ export const StatusBar = ({
     };
   };
 
+  const getStatusColor = () => {
+    if (!isConnected) return "#ef4444"; // Red
+    if (stale) return "#f59e0b"; // Amber/Orange
+    if (data.status === "active") return "#22c55e"; // Green
+    return "#6b7280"; // Gray
+  };
+
   const getStatusText = () => {
     if (!isConnected) return "Disconnected";
-    if (isStale) return "Data Stale"; // ✅ הצג stale
-    if (robotStatus === "active") return "Active";
-    if (robotStatus === "waiting") return "Waiting";
+    if (stale) return "Data Stale"; // ✅ הצג stale
+    if (data.status === "active") return "Active";
+    // if (data.status === "active") return "Waiting";
     return "No Data";
   };
+
   const status = getStatusInfo();
   return (
     <header className="status-bar">
@@ -64,7 +74,7 @@ export const StatusBar = ({
             ↺ Reset View
           </button>
         )}
-        {isStale && (
+        {stale && (
           <span className="status-bar__warning">
             ⚠️ No updates for 5+ seconds
           </span>

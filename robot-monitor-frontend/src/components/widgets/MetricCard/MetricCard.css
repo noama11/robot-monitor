@@ -1,5 +1,6 @@
-.speed-widget {
+.metric-card {
   height: 100%;
+  /* container-type: inline-size; */
   display: flex;
   flex-direction: column;
   background: #1e293b;
@@ -8,20 +9,22 @@
   overflow: hidden;
 }
 
-.speed-widget__header {
+.metric-card-header {
   padding: 0.75rem 1rem;
   background: #0f172a;
   border-bottom: 1px solid #334155;
 }
 
-.speed-widget__title {
+.metric-card-title {
   margin: 0;
   font-size: 1rem;
   font-weight: 600;
   color: #22d3ee;
 }
 
-.speed-widget__content {
+.metric-card-content {
+  padding: clamp(0.75rem, 4cqi, 2rem);
+
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -30,7 +33,7 @@
   padding: 2rem;
 }
 
-.speed-widget__value {
+.metric-card-value {
   font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 700;
   color: #22c55e;
@@ -38,17 +41,17 @@
   font-family: "Courier New", monospace;
 }
 
-.speed-widget__unit {
+.metric-card-unit {
   font-size: clamp(1rem, 2vw, 1.5rem);
   color: #94a3b8;
   margin-top: 1rem;
   font-weight: 600;
+  white-space: nowrap;
 }
 
-/* ✅ כשה-widget ממש קטן */
+/* responsive */
 @media (max-width: 400px) {
-  .speed-widget-content {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
+  .metric-card-content {
+    padding: 1rem;
   }
 }
