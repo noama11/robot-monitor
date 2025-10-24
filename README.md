@@ -101,7 +101,7 @@ Open browser to `http://localhost:5173`
 
 ```bash
 source /opt/ros/humble/setup.bash
-ros2 bag play path/to/robot_data.mcap --loop
+ros2 bag play path/to/robot_data.mcap 
 ```
 
 ---
@@ -165,4 +165,5 @@ pytest
 ```
 
 ---
+
 
