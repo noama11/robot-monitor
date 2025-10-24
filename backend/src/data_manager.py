@@ -55,42 +55,7 @@ class DataManager:
         Get current snapshot of all robot data.
         Returns dict with gps, odom, image, path, and status.
             Returns:
-        dict: Robot data with the following structure:
-        {
-            "gps": {
-                "latitude": float,      # Degrees
-                "longitude": float,     # Degrees
-                "altitude": float,      # Meters
-                "timestamp": float      # Unix timestamp
-            } or None,
-            
-            "odom": {
-                "speed": float,         # m/s (total velocity)
-                "position_x": float,    # Meters
-                "position_y": float,    # Meters
-                "orientation_z": float, # Quaternion Z
-                "orientation_w": float, # Quaternion W
-                "timestamp": float      # Unix timestamp
-            } or None,
-            
-            "image": {
-                "format": str,          # e.g., "jpeg"
-                "data": str,            # Base64 encoded
-                "timestamp": float      # Unix timestamp
-            } or None,
-            
-            "path": [
-                {
-                    "lat": float,
-                    "lng": float,
-                    "timestamp": float
-                },
-                ...
-            ],
-            
-            "status": str,              # "active" | "waiting" | "no_data"
-            "timestamp": str            # ISO format current time
-        }
+        dict: robot data 
         """
         with self._gps_lock, self._odom_lock, self._image_lock:
             status = 'active' if (self._latest_gps and self._latest_odom) else 'waiting'

@@ -19,13 +19,13 @@ websocket:
 # Data Management
 data:
   path_buffer_size: 100  # Keep last 100 GPS points for path visualization: ~25 sec of GPS history at 4Hz (smooth, lightweight)
-  enable_images: false    # Set to true to process camera images (heavy)
+  enable_images: true    # Set to true to process camera images (heavy)
   image_throttle: 2         # Send only 2 images/sec (not all 13)
 
 
 # Logging
 logging:
-  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: "DEBUG"  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
   file: "logs/robot_monitor.log"
   console: true
   format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
