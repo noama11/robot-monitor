@@ -1,15 +1,38 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+// import { MapContainer, TileLayer, Marker, useMap } from "react-leaflet";
+
 import { MAP_CONFIG } from "../../../config/constants";
 import "./MapView.css";
+
+function MapResizeHandler() {
+  const map = useMap();
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    // Observe container size changes
+    const resizeObserver = new ResizeObserver(() => {
+      map.invalidateSize();
+    });
+
+    const container = map.getContainer();
+    resizeObserver.observe(container);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, [map]);
+
+  return null;
+}
 
 export function MapView({ gps, path, odom }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markerRef = useRef(null);
   const pathLayerRef = useRef(null);
-
+  const [isFollowing, setIsFollowing] = useState(true);
   // init map
   useEffect(() => {
     if (!mapRef.current || mapInstanceRef.current) return;
@@ -27,8 +50,21 @@ export function MapView({ gps, path, odom }) {
       minZoom: MAP_CONFIG.minZoom,
     }).addTo(map);
 
+    map.on("dragstart", () => {
+      setIsFollowing(false);
+    });
     mapInstanceRef.current = map;
 
+    const resizeObserver = new ResizeObserver(() => {
+      map.invalidateSize(); // update map size on container resize
+
+      //
+      if (isFollowing && gps) {
+        map.setView([gps.latitude, gps.longitude], map.getZoom());
+      }
+    });
+
+    resizeObserver.observe(mapRef.current);
     return () => {
       if (mapInstanceRef.current) {
         mapInstanceRef.current.remove();
@@ -61,58 +97,19 @@ export function MapView({ gps, path, odom }) {
     }
 
     // center map on robot
-    mapInstanceRef.current.setView(
-      [latitude, longitude],
-      mapInstanceRef.current.getZoom()
-    );
-  }, [gps]);
+    // mapInstanceRef.current.setView(
+    //   [latitude, longitude],
+    //   mapInstanceRef.current.getZoom()
+    // );
 
-  useEffect(() => {
-    if (!mapInstanceRef.current || !gps) return;
-
-    const { latitude, longitude } = gps;
-
-    let rotation = 0;
-    if (odom?.orientation_z && odom?.orientation_w) {
-      const heading = Math.atan2(
-        2.0 * (odom.orientation_w * odom.orientation_z),
-        1.0 - 2.0 * (odom.orientation_z * odom.orientation_z)
+    if (isFollowing) {
+      mapInstanceRef.current.setView(
+        [latitude, longitude],
+        mapInstanceRef.current.getZoom(),
+        { animate: true, duration: 0.5 }
       );
-      rotation = (heading * 180) / Math.PI - 90;
     }
-
-    if (!markerRef.current) {
-      const robotIcon = L.divIcon({
-        className: "robot-marker",
-        html: `<div class="robot-marker__arrow" style="transform: rotate(${rotation}deg)">
-                 <svg width="24" height="24" viewBox="0 0 24 24">
-                   <path d="M12 2 L20 20 L12 16 L4 20 Z" fill="#FF4444" stroke="#FFF" stroke-width="1.5"/>
-                 </svg>
-               </div>`,
-        iconSize: [24, 24],
-        iconAnchor: [12, 12],
-      });
-
-      markerRef.current = L.marker([latitude, longitude], {
-        icon: robotIcon,
-      }).addTo(mapInstanceRef.current);
-    } else {
-      markerRef.current.setLatLng([latitude, longitude]);
-
-      const iconElement = markerRef.current.getElement();
-      if (iconElement) {
-        const arrow = iconElement.querySelector(".robot-marker__arrow");
-        if (arrow) {
-          arrow.style.transform = `rotate(${rotation}deg)`;
-        }
-      }
-    }
-
-    mapInstanceRef.current.setView(
-      [latitude, longitude],
-      mapInstanceRef.current.getZoom()
-    );
-  }, [gps, odom]);
+  }, [gps, odom, isFollowing]);
 
   // update the path
   useEffect(() => {
@@ -132,12 +129,33 @@ export function MapView({ gps, path, odom }) {
     }).addTo(mapInstanceRef.current);
   }, [path]);
 
+  const centerOnRobot = () => {
+    if (mapInstanceRef.current && gps) {
+      setIsFollowing(true);
+      mapInstanceRef.current.setView(
+        [gps.latitude, gps.longitude],
+        mapInstanceRef.current.getZoom(),
+        { animate: true, duration: 0.8 }
+      );
+    }
+  };
   return (
     <div className="map-widget  map-interactive">
       <div className="map-widget__header widget-header">
         <h3 className="map-widget__title">Map</h3>
       </div>
       <div ref={mapRef} className="map-widget__map" />
+      {!isFollowing && gps && (
+        <button
+          onClick={centerOnRobot}
+          className="map-center-btn-glass"
+          title="Center on robot"
+        >
+          <span className="map-center-btn-glass__icon">🎯</span>
+        </button>
+      )}
+
+      {isFollowing && <div className="map-following-badge">🔄 Following</div>}
     </div>
   );
 }

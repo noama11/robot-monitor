@@ -1,7 +1,6 @@
 import "./App.css";
 import { useEffect } from "react";
 
-// import { useRobotData } from "./context/RobotDataContext";
 import { websocketService } from "./services/websocket";
 import { useRobotData } from "./hooks/useRobotData";
 import { StatusBar } from "./components/StatusBar/StatusBar";

@@ -1,6 +1,5 @@
 .metric-card {
   height: 100%;
-  /* container-type: inline-size; */
   display: flex;
   flex-direction: column;
   background: #1e293b;

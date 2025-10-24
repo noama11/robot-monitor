@@ -20,7 +20,7 @@
   border: 1px solid #334155;
 }
 .robot-marker__icon {
-  transition: transform 0.3s ease; /* ✅ חשוב! גורם לחץ להסתובב בצורה חלקה */
+  transition: transform 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +42,7 @@
   flex: 1;
   width: 100%;
   min-height: 200px;
-  z-index: 0; /* המפה מתחת */
+  z-index: 0;
 }
 
 .robot-marker {
@@ -106,6 +106,17 @@
   font-weight: 600;
 }
 
+.map-widget-center-btn {
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 /* Responsive */
 @media (max-width: 768px) {
   .map-widget__header {
@@ -131,11 +142,56 @@
   transition: transform 0.3s ease;
 }
 
-/* תיקון ל-Leaflet */
 .leaflet-marker-icon.robot-arrow-marker {
   overflow: visible !important;
 }
 
-.leaflet-marker-pane {
-  z-index: 600 !important;
+.map-widget__map {
+  height: 100%;
+  width: 100%;
+}
+.map-center-btn-glass {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.map-center-btn-glass:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(-50%) scale(1.1);
+}
+
+.map-center-btn-glass__icon {
+  font-size: 1.25rem;
+}
+
+.map-following-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+
+  background: rgba(59, 130, 246, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.4);
 }
