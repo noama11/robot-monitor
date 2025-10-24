@@ -1,14 +1,6 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 const STORAGE_KEY = "dashboard-layout";
-
-// default layout config
-// const DEFAULT_LAYOUTS = {
-//   map: { x: 0, y: 0, w: 8, h: 20, minW: 4, minH: 10 },
-//   camera: { x: 8, y: 0, w: 4, h: 10, minW: 3, minH: 6 },
-//   linear_velocity: { x: 8, y: 10, w: 4, h: 5, minW: 3, minH: 4 },
-//   angular_velocity: { x: 8, y: 15, w: 4, h: 5, minW: 3, minH: 4 },
-// };
 
 export function useDashboardLayout(widgets) {
   const [layout, setLayout] = useState(() => {
@@ -55,9 +47,7 @@ export function useDashboardLayout(widgets) {
 
   return {
     layout,
-    // handleLayoutChange,
-    // containerRef,
-    // containerWidth,
+
     saveLayout,
     resetLayout,
   };

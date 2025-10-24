@@ -1,5 +1,4 @@
 import { useState, useCallback } from "react";
-import { AVAILABLE_WIDGETS } from "../config/constants";
 
 const STORAGE_KEY = "visible-widgets";
 const DEFAULT_VISIBLE_WIDGETS = [

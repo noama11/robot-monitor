@@ -2,13 +2,7 @@ import { COLORS } from "../../config/constants";
 import { useRobotContext } from "../../context/useRobotContext";
 import "./StatusBar.css";
 
-export const StatusBar = ({
-  stale,
-  connectionStatus,
-  robotStatus,
-  // isStale,
-  onResetLayout,
-}) => {
+export const StatusBar = ({ stale, onResetLayout }) => {
   const { isConnected } = useRobotContext();
   const getStatusInfo = () => {
     if (!isConnected) {
@@ -37,21 +31,6 @@ export const StatusBar = ({
       icon: "⚪",
       text: "Waiting for Data",
     };
-  };
-
-  const getStatusColor = () => {
-    if (!isConnected) return "#ef4444"; // Red
-    if (stale) return "#f59e0b"; // Amber/Orange
-    if (data.status === "active") return "#22c55e"; // Green
-    return "#6b7280"; // Gray
-  };
-
-  const getStatusText = () => {
-    if (!isConnected) return "Disconnected";
-    if (stale) return "Data Stale"; // ✅ הצג stale
-    if (data.status === "active") return "Active";
-    // if (data.status === "active") return "Waiting";
-    return "No Data";
   };
 
   const status = getStatusInfo();

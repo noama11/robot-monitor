@@ -81,7 +81,6 @@
 
 /* The status badge itself */
 .status-badge {
-  /* Dynamic colors are controlled by the --status-color variable */
   background-color: color-mix(in srgb, var(--status-color) 20%, transparent);
   color: var(--status-color);
   border: 2px solid var(--status-color);
@@ -94,10 +93,6 @@
   font-weight: 600;
   font-size: 0.875rem;
 }
-
-/* .status-badge-icon {
-  font-size: 1rem;
-} */
 
 /* Text inside the badge */
 .status-badge-text {

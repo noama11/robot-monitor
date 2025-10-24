@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 // import { useRobotData } from "./context/RobotDataContext";
 import { websocketService } from "./services/websocket";
-import { RobotDataProvider } from "./context/RobotDataProvider";
 import { useRobotData } from "./hooks/useRobotData";
 import { StatusBar } from "./components/StatusBar/StatusBar";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
@@ -14,6 +13,7 @@ function App() {
   const { data, connectionStatus, isConnected, hasData, isStale } =
     useRobotData();
   const { stale } = useRobotContext();
+
   // reset everything to default
   const handleResetAll = () => {
     window.dispatchEvent(new Event("dashboard-reset"));
