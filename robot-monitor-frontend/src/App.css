@@ -11,6 +11,10 @@ body {
 }
 
 .app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #0f172a;
   min-height: 100vh;
 }
 
@@ -103,12 +107,6 @@ body {
   color: #94a3b8;
 }
 
-.app {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background: #0f172a;
-}
 .app__message {
   flex: 1;
   display: flex;
@@ -126,7 +124,7 @@ body {
   margin: 0.25rem 0;
 }
 
-.react-grid-layout {
+/* .react-grid-layout {
   position: relative;
 }
 
@@ -168,7 +166,7 @@ body {
   cursor: se-resize;
 }
 
-/* Widget cursor for dragging */
 .widget-header {
   cursor: move;
-}
+  user-select: none;
+} */

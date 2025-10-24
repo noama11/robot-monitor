@@ -14,20 +14,18 @@ export function MetricsWidget({ gps, odom, path }) {
 
   return (
     <div className="metrics-widget">
-      <div className="metrics-widget__header">
+      <div className="metrics-widget__header widget-header">
         <h3 className="metrics-widget__title">📊 Metrics</h3>
       </div>
 
       <div className="metrics-widget__content">
         <MetricItem
-          icon="🚀"
           label="Speed"
           value={formatSpeed(odom?.speed)}
           highlight={odom && odom.speed > 0}
         />
 
         <MetricItem
-          icon="🧭"
           label="Heading"
           value={formatHeading(odom?.orientation_z, odom?.orientation_w)}
           subtitle={getCompassDirection(
@@ -36,14 +34,9 @@ export function MetricsWidget({ gps, odom, path }) {
           )}
         />
 
-        <MetricItem
-          icon="📍"
-          label="Latitude"
-          value={formatCoordinate(gps?.latitude)}
-        />
+        <MetricItem label="Latitude" value={formatCoordinate(gps?.latitude)} />
 
         <MetricItem
-          icon="📍"
           label="Longitude"
           value={formatCoordinate(gps?.longitude)}
         />

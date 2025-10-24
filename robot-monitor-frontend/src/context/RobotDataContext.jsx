@@ -4,6 +4,7 @@ import {
   useState,
   useEffect,
   useCallback,
+  useRef,
 } from "react";
 import { websocketService } from "../services/websocket";
 import { validateRobotData, isDataStale } from "../utils/validation";

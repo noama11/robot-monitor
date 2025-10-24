@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MAP_CONFIG } from "../../../config/constants";
-import "./MapWidget.css";
+import "./MapView.css";
 
-export function MapWidget({ gps, path }) {
+export function MapView({ gps, path }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
   const markerRef = useRef(null);
@@ -87,8 +87,8 @@ export function MapWidget({ gps, path }) {
 
   return (
     <div className="map-widget">
-      <div className="map-widget__header">
-        <h3 className="map-widget__title">🗺️ Map</h3>
+      <div className="map-widget__header widget-header">
+        <h3 className="map-widget__title">Map</h3>
       </div>
       <div ref={mapRef} className="map-widget__map" />
     </div>

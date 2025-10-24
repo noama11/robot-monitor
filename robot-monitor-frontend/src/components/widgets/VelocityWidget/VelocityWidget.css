@@ -1,0 +1,66 @@
+.velocity-widget {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #334155;
+}
+
+.velocity-widget-header {
+  padding: 0.75rem 1rem;
+  background: #0f172a;
+  border-bottom: 1px solid #334155;
+}
+
+.velocity-widget-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #22d3ee;
+  text-transform: capitalize;
+}
+
+.velocity-widget-content {
+  flex: 1;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.value-display {
+  text-align: center;
+}
+
+.value-display-value {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.value-display-unit {
+  font-size: 1.125rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.bar-container {
+  height: 8px;
+  background: #0f172a;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #334155;
+}
+
+.bar-progress {
+  height: 100%;
+  transition: width 0.3s ease, background 0.3s ease;
+  border-radius: 4px;
+}

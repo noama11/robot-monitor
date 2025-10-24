@@ -1,4 +1,38 @@
-.react-grid-layout {
+/* Cancel scrolling when dragging */
+html.react-grid-layout-dragging,
+body.react-grid-layout-dragging {
+  overflow: hidden !important;
+}
+
+/* Resize handle */
+.react-grid-item > .react-resizable-handle {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  right: 0;
+  bottom: 0;
+}
+.react-grid-item > .react-resizable-handle::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 12px;
+  height: 12px;
+  border-right: 3px solid #38bdf8;
+  border-bottom: 3px solid #38bdf8;
+  opacity: 0.9;
+}
+.react-grid-item:hover > .react-resizable-handle::after {
+  border-color: #facc15;
+}
+
+.widget-header {
+  cursor: move;
+  user-select: none;
+}
+
+/* .react-grid-layout {
   position: relative;
 }
 
@@ -38,4 +72,4 @@
 
 .react-resizable-handle {
   cursor: se-resize;
-}
+} */

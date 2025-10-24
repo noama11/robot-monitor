@@ -1,3 +1,22 @@
+export const AVAILABLE_WIDGETS = [
+  {
+    id: "map",
+    name: "Map",
+    defaultLayout: { x: 0, y: 0, w: 7, h: 24 },
+  },
+  {
+    id: "camera",
+    name: "Camera",
+    defaultLayout: { x: 7, y: 0, w: 5, h: 14 },
+  },
+
+  {
+    id: "speed",
+    name: "Velocity",
+    defaultLayout: { x: 7, y: 8, w: 5, h: 10 },
+  },
+];
+
 // Backend connection settings
 export const WEBSOCKET_CONFIG = {
   url: import.meta.env.VITE_WS_URL || "ws://localhost:8765",

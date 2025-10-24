@@ -1,4 +1,4 @@
-.robot-header {
+/* .robot-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -40,4 +40,108 @@
 .robot-status__text {
   text-transform: uppercase;
   letter-spacing: 0.4px;
+} */
+
+/* Main container for the status bar */
+.status-bar {
+  background-color: #1e293b;
+  color: #f1f5f9;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #334155;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Title element within the status bar */
+.status-bar-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Container for all items on the right side */
+.status-bar-right-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Base styles for all buttons in the status bar */
+.status-bar-button {
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-bar-button:hover {
+  filter: brightness(1.1);
+}
+
+/* Specific styles for the reset button */
+.reset-button {
+  background-color: #475569;
+  color: #f1f5f9;
+}
+
+.reset-button:hover {
+  background-color: #64748b;
+}
+
+.reset-button:disabled {
+  background-color: #334155;
+  color: #64748b;
+  cursor: not-allowed;
+  filter: none;
+}
+
+.settings-button {
+  background-color: transparent;
+  color: #94a3b8;
+  font-size: 1.5rem;
+  padding: 0.25rem;
+}
+
+.settings-button:hover {
+  color: #f1f5f9;
+}
+
+.settings-button:disabled {
+  background-color: #334155;
+  color: #64748b;
+  cursor: not-allowed;
+  filter: none;
+}
+
+/* The status badge itself */
+.status-badge {
+  /* Dynamic colors are controlled by the --status-color variable */
+  background-color: color-mix(in srgb, var(--status-color) 20%, transparent);
+  color: var(--status-color);
+  border: 2px solid var(--status-color);
+
+  padding: 0.4rem 0.8rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* .status-badge-icon {
+  font-size: 1rem;
+} */
+
+/* Text inside the badge */
+.status-badge-text {
+  line-height: 1;
 }

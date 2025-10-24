@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { RobotDataContext } from "../context/RobotDataContext";
 
 export function useRobotData() {
-  console.log("call useRobotHook");
+  // console.log("call useRobotHook");
   const context = useContext(RobotDataContext);
 
   if (!context) {

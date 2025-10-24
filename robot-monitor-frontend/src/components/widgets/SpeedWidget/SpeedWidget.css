@@ -1,0 +1,96 @@
+.speed-widget {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #1e293b;
+  border-radius: 12px;
+  border: 1px solid #334155;
+  overflow: hidden;
+}
+
+.speed-widget-header {
+  padding: 0.75rem 1rem;
+  background: #0f172a;
+  border-bottom: 1px solid #334155;
+  flex-shrink: 0;
+}
+
+.speed-widget-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #22d3ee;
+}
+
+.speed-widget-content {
+  flex: 1;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.velocity-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background: #0f172a;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.velocity-card-icon {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 0.5rem;
+}
+
+.velocity-card-data {
+  text-align: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.velocity-card-label {
+  font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.velocity-card:first-child .velocity-card-value {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  color: #22c55e;
+  line-height: 1;
+  font-family: "Courier New", monospace;
+}
+
+.velocity-card:last-child .velocity-card-value {
+  font-size: clamp(1.25rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #3b82f6;
+  line-height: 1;
+  font-family: "Courier New", monospace;
+}
+
+.velocity-card-unit {
+  font-size: clamp(0.65rem, 1.5vw, 0.85rem);
+  color: #64748b;
+  margin-top: 0.5rem;
+}
+
+/* ✅ כשה-widget ממש קטן */
+@media (max-width: 400px) {
+  .speed-widget-content {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}

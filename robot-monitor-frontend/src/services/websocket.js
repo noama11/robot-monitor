@@ -44,6 +44,7 @@ class WebSocketService {
     this.ws.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
+        // console.log("Data received from backend:", receivedData);
         this._notifyListeners(data);
       } catch (error) {
         console.error("Failed to parse WebSocket message:", error);
