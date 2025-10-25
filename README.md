@@ -78,12 +78,18 @@ Unit tests cover backend threading behavior and data management where concurrenc
 
 ### Running the System
 
-**Terminal 1 - Backend:**
-
+### Terminal 1 – Backend
 ```bash
+# Load ROS environment
 source /opt/ros/humble/setup.bash
+
+# Create a venv that can see ROS packages (only once)
 cd backend
+python3 -m venv --system-site-packages .venv
+source .venv/bin/activate
 pip install -r requirements.txt
+
+# Run backend server
 python3 main.py
 ```
 
@@ -161,9 +167,12 @@ Run backend unit tests:
 
 ```bash
 cd backend
-pytest
+source /opt/ros/humble/setup.bash
+source .venv/bin/activate
+PYTHONPATH=./src:$PYTHONPATH python -m pytest -v
 ```
 
 ---
+
 
 
