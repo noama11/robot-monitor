@@ -64,7 +64,7 @@ class OdomNode(BaseRobotNode):
         # calc yaw
         yaw = self.quaternion_to_yaw(qx, qy, qz, qw)
         
-        heading_deg = (math.degrees(yaw) + 360 % 360) 
+        heading_deg = (math.degrees(yaw) + 360) % 360
         
         # Build data dict
         odom_data = {
