@@ -3,7 +3,8 @@
 A web based monitoring dashboard for ROS 2 robots. The system provides remote operators with real time visibility into robot position, velocity, and camera feeds through a customizable interface.
 
 
-<img width="1344" height="739" alt="image" src="https://github.com/user-attachments/assets/ad404492-6dc6-440c-befa-68e253e956ba" />
+<img width="1573" height="845" alt="image" src="https://github.com/user-attachments/assets/324ee94a-fa7d-479b-a639-c18ac2cd50d2" />
+
 
 
 ---
@@ -173,6 +174,7 @@ PYTHONPATH=./src:$PYTHONPATH python -m pytest -v
 ```
 
 ---
+
 
 
 
