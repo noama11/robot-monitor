@@ -45,6 +45,22 @@ class OdomNode(BaseRobotNode):
         yaw = math.atan2(siny_cosp, cosy_cosp)
         return yaw
     
+    def ros_yaw_to_map_heading(self, yaw_rad):
+        """
+        Convert ROS yaw  to map heading (North=0, clockwise).
+        ROS: 0° = East, 90° = North (counter-clockwise)
+        Map: 0° = North, 90° = East (clockwise)   
+        returns:
+            float: Heading in degrees (0-360), North=0
+        """
+        # Convert to degrees
+        yaw_deg = math.degrees(yaw_rad)
+        
+        # Convert from ROS (East=0) to Map (North=0, CW)
+        # Formula: heading = 90 - yaw
+        heading = (90 - yaw_deg + 360) % 360
+
+        return heading
     
     def odom_callback(self, msg):
 
@@ -61,17 +77,23 @@ class OdomNode(BaseRobotNode):
         qz = msg.pose.pose.orientation.z
         qw = msg.pose.pose.orientation.w
         
-        # calc yaw
-        yaw = self.quaternion_to_yaw(qx, qy, qz, qw)
+        # # calc yaw
+        # yaw = self.quaternion_to_yaw(qx, qy, qz, qw)
+        # heading_deg = (math.degrees(yaw) + 360) % 360
         
-        heading_deg = (math.degrees(yaw) + 360) % 360
+        
+       # calc yaw in ROS frame
+        yaw_ros = self.quaternion_to_yaw(qx, qy, qz, qw)
+        
+        # Convert to map heading (North=0, clockwise)
+        heading_deg = self.ros_yaw_to_map_heading(yaw_ros)
         
         # Build data dict
         odom_data = {
             'speed': speed,
             'position_x': msg.pose.pose.position.x,
             'position_y': msg.pose.pose.position.y,
-            'yaw': yaw, # in radians
+            # 'yaw': yaw, # in radians
             'heading_deg': heading_deg, # in degrees
             'orientation_z': qz,
             'orientation_w': qw,
