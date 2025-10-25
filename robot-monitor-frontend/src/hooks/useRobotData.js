@@ -14,7 +14,6 @@ export function useRobotData() {
   const [connectionStatus, setConnectionStatus] = useState("disconnected");
   const [isStale, setIsStale] = useState(true);
 
-  const prevConnectionStatusRef = useRef("disconnected");
   const lastUpdateTime = useRef(null);
 
   //  incoming data
@@ -49,17 +48,17 @@ export function useRobotData() {
   }, [handleData, handleStatusChange]);
 
   // Staleness check interval
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!lastUpdateTime.current) {
-      } else {
-        const timeSinceUpdate = Date.now() - lastUpdateTime.current;
-        const staleStatus = timeSinceUpdate > STALE_THRESHOLD_MS;
-      }
-    }, 1000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (!lastUpdateTime.current) {
+  //     } else {
+  //       const timeSinceUpdate = Date.now() - lastUpdateTime.current;
+  //       const staleStatus = timeSinceUpdate > STALE_THRESHOLD_MS;
+  //     }
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return {
     data, // gps, odom, path, images
